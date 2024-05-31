@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CapitalizedWordHeuristic implements Heuristics {
+public class BiggerThan3Heuristic  implements Heuristics {
 
     @Override
     public String getName() {
-        return "Capitalized Word";
+        return "Bigger Than 3";
     }
 
     @Override
@@ -26,7 +26,9 @@ public class CapitalizedWordHeuristic implements Heuristics {
         Matcher matcher = pattern.matcher(text);
 
         while (matcher.find()) {
-            candidates.add(matcher.group());
+            if(matcher.group().length() > 3) {
+                candidates.add(matcher.group());
+            }
         }
 
         return candidates;

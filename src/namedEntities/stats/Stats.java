@@ -8,53 +8,53 @@ import java.util.Set;
 import namedEntities.NamedEntity;
 
 public class Stats {
-    public static List<Category> getCatStats(List<NamedEntity> entities){
-        List<Category> categories = new ArrayList<>();
+    public static List<CatStat> getCatStats(List<NamedEntity> entities) {
         Set<String> catNames = new HashSet<>();
+        List<CatStat> stats = new ArrayList<>();
 
         for (NamedEntity e : entities) {
-            catNames.add(e.getCategory());
+            catNames.add(e.getCategory().getName());
         }
 
-        for(String s :catNames) {
-            categories.add(new Category(s));
+        for (String cat : catNames) {
+            stats.add(new CatStat(new Category(cat)));
         }
 
         for (NamedEntity e : entities) {
-            for(Category c : categories) {
-                if (c.getName().equals(e.getCategory())) {
-                    c.add(e.getLabel());
+            for (Stat st : stats) {
+                if (st.getName().equals(e.getCategory().getName())) {
+                    st.add(e.getLabel());
                 }
             }
         }
 
-        return categories;
+        return stats;
     }
 
-    public static List<Topic> getTopicStats(List<NamedEntity> entities){
-        List<Topic> topics = new ArrayList<>();
+    public static List<TopicStat> getTopicStats(List<NamedEntity> entities) {
         Set<String> topicNames = new HashSet<>();
+        List<TopicStat> stats = new ArrayList<>();
 
-        for (NamedEntity entity : entities) {
-            for(String topic : entity.getTopic()){
-                topicNames.add(topic);
+        for (NamedEntity e : entities) {
+            for (Topic topic : e.getTopics()) {
+                topicNames.add(topic.getName());
             }
         }
 
-        for(String s : topicNames){
-            topics.add(new Topic(s));
+        for (String topic : topicNames) {
+            stats.add(new TopicStat(new Topic(topic)));
         }
 
-        for(NamedEntity e : entities){
-            for(Topic t : topics){
-                for (String s : e.getTopic()) {
-                    if (t.getName().equals(s)) {
-                        t.add(e.getLabel());
+        for (NamedEntity e : entities) {
+            for (Topic topic : e.getTopics()) {
+                for (Stat st : stats) {
+                    if (st.getName().equals(topic.getName())) {
+                        st.add(e.getLabel());
                     }
                 }
             }
         }
 
-        return topics;
+        return stats;
     }
 }

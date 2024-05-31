@@ -33,7 +33,11 @@ public class UserInterface {
                             optionDict.put(option.getName(), args[i + 1]);
                             i++;
                         } else {
-                            System.out.println("Invalid inputs");
+                            if (args[i].equals("-ne") || args[i].equals("--named-entity")) {
+                                System.out.println(
+                                    "\nPlease provide a valid Heuristic, for more information use -h or --help\n");                                
+                            }
+                            System.out.println("Invalid or absent inputs after : " + args[i]);
                             System.exit(1);
                         }
                     }
@@ -41,14 +45,23 @@ public class UserInterface {
             }
         }
 
-        Boolean printFeed = optionDict.containsKey("-pf");
-        Boolean printHelp = optionDict.containsKey("-h");
-        Boolean computeNamedEntities = optionDict.containsKey("-ne");
-        Boolean printStats = optionDict.containsKey("-sf");
-        // TODO: use value for heuristic config
+        Boolean printFeed = (optionDict.containsKey("-pf") || optionDict.containsKey("--print-feed"));
+        Boolean printHelp = (optionDict.containsKey("-h") || optionDict.containsKey("--help"));
+        Boolean computeNamedEntities = (optionDict.containsKey("-ne") || optionDict.containsKey("--named-entity"));
+        Boolean printStats = (optionDict.containsKey("-sf") || optionDict.containsKey("--stats-format"));
+
         String statFormat = optionDict.get("-sf");
+        if (statFormat == null) {
+            statFormat = optionDict.get("--stats-format");
+        }
         String heuristicName = optionDict.get("-ne");
+        if (heuristicName == null) {
+            optionDict.get("--named-entity");
+        }
         String feedKey = optionDict.get("-f");
+        if (feedKey == null) {
+            optionDict.get("--feed");
+        }
 
         return new Config(printFeed, computeNamedEntities, printHelp, printStats, statFormat, heuristicName, feedKey);
     }

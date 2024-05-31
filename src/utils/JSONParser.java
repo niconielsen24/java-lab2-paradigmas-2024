@@ -9,6 +9,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import namedEntities.stats.Category;
+import namedEntities.stats.Topic;
+
 public class JSONParser {
 
     static public List<FeedsData> parseJsonFeedsData(String jsonFilePath) throws IOException {
@@ -34,11 +37,11 @@ public class JSONParser {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             String label = jsonObject.getString("label");
-            String category = jsonObject.getString("Category");
+            Category category = new Category(jsonObject.getString("Category"));
             JSONArray topics = jsonObject.getJSONArray("Topics");
-            List<String> topicList = new ArrayList<>();
+            List<Topic> topicList = new ArrayList<>();
             for (int j = 0; j < topics.length(); j++) {
-                topicList.add(topics.getString(j));
+                topicList.add(new Topic(topics.getString(j)));
             }
             JSONArray keywords = jsonObject.getJSONArray("keywords");
             List<String> keywordList = new ArrayList<>();

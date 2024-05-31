@@ -16,4 +16,3 @@ apt install openjdk-17-jdk openjdk-17-jre
 
 - `make clean` borra los archivos `.class` que se generan en la compilación
 
-# java-lab2-paradigmas-2024

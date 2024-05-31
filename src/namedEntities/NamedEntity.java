@@ -2,30 +2,31 @@ package namedEntities;
 
 import java.util.*;
 
+import namedEntities.stats.Category;
+import namedEntities.stats.Topic;
+
 public class NamedEntity {
     private String label;
-    private List<String> topics;
-    private String category;
+    private List<Topic> topics;
+    private Category category;
     private List<String> keywords;
-    // private int occurrences = 0;
 
-    public NamedEntity(String label, List<String> topics, String category, List<String> keywords) {
+    NamedEntity(String label, List<Topic> topics, Category category, List<String> keywords) {
         this.label = label;
         this.topics = topics;
         this.category = category;
         this.keywords = keywords;
-        // this.occurrences++;
     }
 
     public String getLabel() {
         return label;
     }
 
-    public List<String> getTopic() {
+    public List<Topic> getTopics() {
         return topics;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -33,29 +34,17 @@ public class NamedEntity {
         return keywords;
     }
 
-    // public int getOccurrences() {
-        // return occurrences;
-    // }
-
-    // public void incrementOccurrences() {
-        // this.occurrences++;
-    // }
-
-    // public void decrementOccurrences() {
-        // this.occurrences--;
-    // }
-
     public void print() {
-        System.out.println("Label: " + label);
-        System.out.println("Category: " + category);
+        System.out.println("Label: " + this.label);
+        System.out.println("Category: " + this.category.getName());
         System.out.println("Topics: ");
-        for (String topic : topics) {
-            System.out.println("    " + topic);
+        for (Topic topic : this.topics) {
+            System.out.println("    " + topic.getName());
         }
         System.out.println("Keywords: ");
-        for (String keyword : keywords) {
+        for (String keyword : this.keywords) {
             System.out.println("    " + keyword);
         }
-        // System.out.println("Occurrences: " + occurrences);
     }
+
 }

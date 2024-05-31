@@ -2,13 +2,16 @@ package utils;
 
 import java.util.List;
 
-public class DictionaryData implements Comparable<String>{
+import namedEntities.stats.Category;
+import namedEntities.stats.Topic;
+
+public class DictionaryData {
     private String label;
-    private String category;
-    private List<String> topics;
+    private Category category;
+    private List<Topic> topics;
     private List<String> keywords;
 
-    public DictionaryData(String label, String category, List<String> topics, List<String> keywords) {
+    public DictionaryData(String label, Category category, List<Topic> topics, List<String> keywords) {
         this.label = label;
         this.category = category;
         this.topics = topics;
@@ -16,36 +19,31 @@ public class DictionaryData implements Comparable<String>{
     }
 
     public String getLabel() {
-        return label;
+        return this.label;
     }
 
-    public String getCategory() {
-        return category;
+    public Category getCategory() {
+        return this.category;
     }
 
-    public List<String> getTopics() {
-        return topics;
+    public List<Topic> getTopics() {
+        return this.topics;
     }
 
     public List<String> getKeywords() {
-        return keywords;
+        return this.keywords;
     }
 
-    public void print(){
-        System.out.println("Label: " + label);
-        System.out.println("Category: " + category);
+    public void print() {
+        System.out.println("Label: " + this.label);
+        System.out.println("Category: " + this.category);
         System.out.println("Topics: ");
-        for (String topic : topics) {
-            System.out.println("    " + topic);
+        for (Topic topic : this.topics) {
+            System.out.println("    " + topic.getName());
         }
         System.out.println("Keywords: ");
-        for (String keyword : keywords) {
+        for (String keyword : this.keywords) {
             System.out.println("    " + keyword);
         }
     }
-
-    @Override
-    public int compareTo(String other) {
-        return this.label.compareTo(other);
-    }
-} 
+}

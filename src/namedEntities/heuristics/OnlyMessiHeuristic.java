@@ -1,19 +1,16 @@
 package namedEntities.heuristics;
 
 import java.text.Normalizer;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CapitalizedWordHeuristic implements Heuristics {
-
-    @Override
-    public String getName() {
-        return "Capitalized Word";
+public class OnlyMessiHeuristic implements Heuristics {
+    public String getName(){
+        return "Only Messi";
     }
 
-    @Override
     public List<String> extractCandidates(String text) {
         List<String> candidates = new ArrayList<>();
 
@@ -21,7 +18,7 @@ public class CapitalizedWordHeuristic implements Heuristics {
         text = Normalizer.normalize(text, Normalizer.Form.NFD);
         text = text.replaceAll("\\p{M}", "");
 
-        Pattern pattern = Pattern.compile("[A-Z][a-z]+(?:\\s[A-Z][a-z]+)*");
+        Pattern pattern = Pattern.compile("(?i)m(?:[eE][sS][sS][iI])");
 
         Matcher matcher = pattern.matcher(text);
 

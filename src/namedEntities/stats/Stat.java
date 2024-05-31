@@ -1,23 +1,13 @@
 package namedEntities.stats;
 
-class Stat {
-    private String name;
-    private int occurrences;
+import java.util.HashMap;
 
-    public Stat(String name){
-        this.name = name;
-        this.occurrences = 1;
-    }
+public interface Stat {
+    public void add(String entity);
 
-    public void incrementOccurrences() {
-        this.occurrences++;
-    }
+    public String getName();
 
-    public String getName(){
-        return this.name;
-    }
+    public HashMap<String, Integer> getDict();
 
-    public void print(){
-        System.out.println("        " + this.name + '(' + this.occurrences + ')');
-    }
+    public void print();
 }
